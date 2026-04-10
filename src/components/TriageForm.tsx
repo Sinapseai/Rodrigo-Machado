@@ -39,6 +39,13 @@ const TriageForm = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const canProceed = () => {
+    if (step === 0) return formData.name.trim() !== '' && formData.age.trim() !== '';
+    if (step === 1) return formData.goal !== '' && (formData.goal !== 'Outro' || formData.otherGoal.trim() !== '');
+    if (step === 2) return formData.activityLevel !== '';
+    return true;
+  };
+
   const handleFinalSubmit = () => {
     const finalGoal = formData.goal === 'Outro' ? formData.otherGoal : formData.goal;
     
@@ -266,7 +273,12 @@ const TriageForm = () => {
           {step < totalSteps - 1 ? (
             <button 
               onClick={() => paginate(1)}
-              className="px-6 py-2 bg-brand-600 text-white text-sm font-medium rounded-full shadow-md shadow-brand-200 hover:bg-brand-700 transition-all flex items-center gap-2"
+              disabled={!canProceed()}
+              className={`px-6 py-2 text-sm font-medium rounded-full transition-all flex items-center gap-2 ${
+                !canProceed() 
+                  ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                  : 'bg-brand-600 text-white shadow-md shadow-brand-200 hover:bg-brand-700'
+              }`}
             >
               Próximo <ChevronRight className="w-4 h-4" />
             </button>
