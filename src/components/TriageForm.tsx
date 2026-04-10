@@ -85,11 +85,11 @@ const TriageForm = () => {
   };
 
   return (
-    <div className="w-full bg-white rounded-3xl shadow-sm border border-sage-100 overflow-hidden mt-6 text-left">
-      <div className="bg-sage-500 p-5 text-white text-center">
+    <div className="w-full bg-white rounded-3xl shadow-sm border border-brand-100 overflow-hidden mt-6 text-left">
+      <div className="bg-brand-500 p-5 text-white text-center">
         <h3 className="font-serif text-lg font-medium">Agendamento Rápido</h3>
-        <p className="text-sage-100 text-xs mt-1">Passo {step + 1} de {totalSteps}</p>
-        <div className="w-full bg-sage-700/30 h-1.5 rounded-full mt-3 overflow-hidden">
+        <p className="text-brand-100 text-xs mt-1">Passo {step + 1} de {totalSteps}</p>
+        <div className="w-full bg-brand-700/30 h-1.5 rounded-full mt-3 overflow-hidden">
           <motion.div 
             className="h-full bg-white rounded-full"
             initial={{ width: 0 }}
@@ -120,7 +120,7 @@ const TriageForm = () => {
                     type="text" 
                     value={formData.name}
                     onChange={(e) => handleChange('name', e.target.value)}
-                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent outline-none transition-all text-sm"
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition-all text-sm"
                     placeholder="Seu nome"
                   />
                 </div>
@@ -130,7 +130,7 @@ const TriageForm = () => {
                     type="number" 
                     value={formData.age}
                     onChange={(e) => handleChange('age', e.target.value)}
-                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent outline-none transition-all text-sm"
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition-all text-sm"
                     placeholder="Ex: 30"
                   />
                 </div>
@@ -157,12 +157,12 @@ const TriageForm = () => {
                     onClick={() => handleChange('goal', goal)}
                     className={`w-full p-3 text-left rounded-xl border transition-all flex items-center justify-between ${
                       formData.goal === goal 
-                        ? 'bg-sage-50 border-sage-500 text-sage-700' 
+                        ? 'bg-brand-50 border-brand-500 text-brand-700' 
                         : 'bg-white border-slate-100 text-slate-600 hover:bg-slate-50'
                     }`}
                   >
                     <span className="text-sm font-medium">{goal}</span>
-                    {formData.goal === goal && <Check className="w-4 h-4 text-sage-600" />}
+                    {formData.goal === goal && <Check className="w-4 h-4 text-brand-600" />}
                   </button>
                 ))}
                 {formData.goal === 'Outro' && (
@@ -171,7 +171,7 @@ const TriageForm = () => {
                       type="text" 
                       value={formData.otherGoal}
                       onChange={(e) => handleChange('otherGoal', e.target.value)}
-                      className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent outline-none transition-all text-sm"
+                      className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition-all text-sm"
                       placeholder="Digite seu objetivo..."
                     />
                   </motion.div>
@@ -199,12 +199,12 @@ const TriageForm = () => {
                     onClick={() => handleChange('activityLevel', option)}
                     className={`w-full p-3 text-left rounded-xl border transition-all flex items-center justify-between ${
                       formData.activityLevel === option 
-                        ? 'bg-sage-50 border-sage-500 text-sage-700' 
+                        ? 'bg-brand-50 border-brand-500 text-brand-700' 
                         : 'bg-white border-slate-100 text-slate-600 hover:bg-slate-50'
                     }`}
                   >
                     <span className="text-sm font-medium">{option}</span>
-                    {formData.activityLevel === option && <Check className="w-4 h-4 text-sage-600" />}
+                    {formData.activityLevel === option && <Check className="w-4 h-4 text-brand-600" />}
                   </button>
                 ))}
               </div>
@@ -233,7 +233,7 @@ const TriageForm = () => {
                     type="date" 
                     value={formData.date}
                     onChange={(e) => handleChange('date', e.target.value)}
-                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent outline-none transition-all text-sm text-slate-700"
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition-all text-sm text-slate-700"
                   />
                 </div>
                 <div>
@@ -244,7 +244,7 @@ const TriageForm = () => {
                     type="time" 
                     value={formData.time}
                     onChange={(e) => handleChange('time', e.target.value)}
-                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-sage-400 focus:border-transparent outline-none transition-all text-sm text-slate-700"
+                    className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition-all text-sm text-slate-700"
                   />
                 </div>
               </div>
@@ -266,14 +266,14 @@ const TriageForm = () => {
           {step < totalSteps - 1 ? (
             <button 
               onClick={() => paginate(1)}
-              className="px-6 py-2 bg-sage-600 text-white text-sm font-medium rounded-full shadow-md shadow-sage-200 hover:bg-sage-700 transition-all flex items-center gap-2"
+              className="px-6 py-2 bg-brand-600 text-white text-sm font-medium rounded-full shadow-md shadow-brand-200 hover:bg-brand-700 transition-all flex items-center gap-2"
             >
               Próximo <ChevronRight className="w-4 h-4" />
             </button>
           ) : (
             <button 
               onClick={handleFinalSubmit}
-              className="px-6 py-2 bg-sage-600 text-white text-sm font-medium rounded-full shadow-md shadow-sage-200 hover:bg-sage-700 transition-all flex items-center gap-2"
+              className="px-6 py-2 bg-brand-600 text-white text-sm font-medium rounded-full shadow-md shadow-brand-200 hover:bg-brand-700 transition-all flex items-center gap-2"
             >
               Agendar <ArrowRight className="w-4 h-4" />
             </button>

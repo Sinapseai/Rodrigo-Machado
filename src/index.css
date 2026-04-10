@@ -1,10 +1,19 @@
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Playfair+Display:ital,wght@0,400;0,600;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Montserrat:wght@500;600;700;800&display=swap');
 @import "tailwindcss";
 
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
-  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+  --font-serif: "Montserrat", ui-sans-serif, system-ui, sans-serif;
   
+  --color-brand-50: #fdf3f5;
+  --color-brand-100: #f9e4e7;
+  --color-brand-200: #f1c7cf;
+  --color-brand-300: #e59fb0;
+  --color-brand-400: #d46e85;
+  --color-brand-500: #ae3b4e;
+  --color-brand-600: #93293c;
+  --color-brand-700: #7b202e;
+
   --color-sage-50: #f4f7f5;
   --color-sage-100: #e3ebe6;
   --color-sage-200: #c5d9cd;

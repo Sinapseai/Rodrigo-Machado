@@ -37,9 +37,9 @@ const Specialties = () => {
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true }}
             transition={{ delay: index * 0.1 }}
-            className="bg-white p-4 rounded-2xl shadow-sm border border-slate-50 flex flex-col items-center text-center gap-3 hover:border-sage-200 transition-colors"
+            className="bg-white p-4 rounded-2xl shadow-sm border border-slate-50 flex flex-col items-center text-center gap-3 hover:border-brand-200 transition-colors"
           >
-            <div className="w-10 h-10 rounded-full bg-sage-50 flex items-center justify-center text-sage-600">
+            <div className="w-10 h-10 rounded-full bg-brand-50 flex items-center justify-center text-brand-600">
               <item.icon className="w-5 h-5" strokeWidth={1.5} />
             </div>
             <div>
