@@ -6,7 +6,7 @@ import { ChevronRight, Check, ArrowRight, Calendar, Clock } from 'lucide-react';
 interface FormData {
   name: string;
   age: string;
-  goal: string;
+  goal: string[];
   otherGoal: string;
   activityLevel: string;
   date: string;
@@ -18,7 +18,7 @@ const TriageForm = () => {
   const [formData, setFormData] = useState<FormData>({
     name: '',
     age: '',
-    goal: '',
+    goal: [],
     otherGoal: '',
     activityLevel: '',
     date: '',
@@ -39,6 +39,17 @@ const TriageForm = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const handleGoalToggle = (selectedGoal: string) => {
+    setFormData(prev => {
+      const currentGoals = prev.goal || [];
+      if (currentGoals.includes(selectedGoal)) {
+        return { ...prev, goal: currentGoals.filter(g => g !== selectedGoal) };
+      } else {
+        return { ...prev, goal: [...currentGoals, selectedGoal] };
+      }
+    });
+  };
+
   const getBrasiliaTime = () => {
     const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
     const dateStr = [
@@ -55,7 +66,7 @@ const TriageForm = () => {
 
   const canProceed = () => {
     if (step === 0) return formData.name.trim() !== '' && formData.age.trim() !== '';
-    if (step === 1) return formData.goal !== '' && (formData.goal !== 'Outro' || formData.otherGoal.trim() !== '');
+    if (step === 1) return formData.goal.length > 0 && (!formData.goal.includes('Outro') || formData.otherGoal.trim() !== '');
     if (step === 2) return formData.activityLevel !== '';
     if (step === 3) {
       if (!formData.date || !formData.time) return false;
@@ -68,7 +79,8 @@ const TriageForm = () => {
   };
 
   const handleFinalSubmit = () => {
-    const finalGoal = formData.goal === 'Outro' ? formData.otherGoal : formData.goal;
+    const finalGoalList = formData.goal.map(g => g === 'Outro' ? formData.otherGoal : g);
+    const finalGoal = finalGoalList.join(', ');
     
     let formattedDate = formData.date;
     if (formData.date) {
@@ -178,22 +190,23 @@ const TriageForm = () => {
               className="space-y-4"
             >
               <h4 className="text-base font-medium text-slate-800">Qual seu objetivo principal?</h4>
+              <p className="text-xs text-slate-500 mb-3">Selecione uma ou mais opções</p>
               <div className="space-y-2">
-                {['Emagrecimento', 'Ganho de Massa', 'Reeducação Alimentar', 'Melhorar Saúde', 'Performance Esportiva', 'Outro'].map((goal) => (
+                {['Emagrecimento', 'Ganho de Massa', 'Reeducação Alimentar', 'Melhorar Saúde', 'Performance Esportiva', 'Outro'].map((goalOption) => (
                   <button
-                    key={goal}
-                    onClick={() => handleChange('goal', goal)}
+                    key={goalOption}
+                    onClick={() => handleGoalToggle(goalOption)}
                     className={`w-full p-3 text-left rounded-xl border transition-all flex items-center justify-between ${
-                      formData.goal === goal 
+                      formData.goal.includes(goalOption) 
                         ? 'bg-brand-50 border-brand-500 text-brand-700' 
                         : 'bg-white border-slate-100 text-slate-600 hover:bg-slate-50'
                     }`}
                   >
-                    <span className="text-sm font-medium">{goal}</span>
-                    {formData.goal === goal && <Check className="w-4 h-4 text-brand-600" />}
+                    <span className="text-sm font-medium">{goalOption}</span>
+                    {formData.goal.includes(goalOption) && <Check className="w-4 h-4 text-brand-600" />}
                   </button>
                 ))}
-                {formData.goal === 'Outro' && (
+                {formData.goal.includes('Outro') && (
                   <motion.div initial={{ opacity: 0, height: 0 }} animate={{ opacity: 1, height: 'auto' }} className="pt-2">
                     <input 
                       type="text" 
