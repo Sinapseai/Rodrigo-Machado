@@ -4,7 +4,7 @@
 @theme {
   --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
   --font-serif: "Montserrat", ui-sans-serif, system-ui, sans-serif;
-  
+
   --color-brand-50: #fdf3f5;
   --color-brand-100: #f9e4e7;
   --color-brand-200: #f1c7cf;
@@ -22,7 +22,7 @@
   --color-sage-500: #568564;
   --color-sage-600: #426a4e;
   --color-sage-700: #365540;
-  
+
   --color-serenity-50: #f0f4f8;
   --color-serenity-100: #dce6f0;
   --color-serenity-500: #6b9ac4;
@@ -30,5 +30,6 @@
 
 body {
   background-color: var(--color-sage-50);
-  color: #334155; /* Slate 700 */
+  color: #334155;
+  /* Slate 700 */
 }

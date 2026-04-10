@@ -39,10 +39,31 @@ const TriageForm = () => {
     setFormData(prev => ({ ...prev, [field]: value }));
   };
 
+  const getBrasiliaTime = () => {
+    const now = new Date(new Date().toLocaleString("en-US", { timeZone: "America/Sao_Paulo" }));
+    const dateStr = [
+      now.getFullYear(),
+      String(now.getMonth() + 1).padStart(2, '0'),
+      String(now.getDate()).padStart(2, '0')
+    ].join('-');
+    const timeStr = [
+      String(now.getHours()).padStart(2, '0'),
+      String(now.getMinutes()).padStart(2, '0')
+    ].join(':');
+    return { dateStr, timeStr };
+  };
+
   const canProceed = () => {
     if (step === 0) return formData.name.trim() !== '' && formData.age.trim() !== '';
     if (step === 1) return formData.goal !== '' && (formData.goal !== 'Outro' || formData.otherGoal.trim() !== '');
     if (step === 2) return formData.activityLevel !== '';
+    if (step === 3) {
+      if (!formData.date || !formData.time) return false;
+      const { dateStr, timeStr } = getBrasiliaTime();
+      if (formData.date < dateStr) return false;
+      if (formData.date === dateStr && formData.time < timeStr) return false;
+      return true;
+    }
     return true;
   };
 
@@ -238,6 +259,7 @@ const TriageForm = () => {
                   </label>
                   <input 
                     type="date" 
+                    min={getBrasiliaTime().dateStr}
                     value={formData.date}
                     onChange={(e) => handleChange('date', e.target.value)}
                     className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition-all text-sm text-slate-700"
@@ -249,6 +271,7 @@ const TriageForm = () => {
                   </label>
                   <input 
                     type="time" 
+                    min={formData.date === getBrasiliaTime().dateStr ? getBrasiliaTime().timeStr : undefined}
                     value={formData.time}
                     onChange={(e) => handleChange('time', e.target.value)}
                     className="w-full p-3 bg-slate-50 border border-slate-200 rounded-xl focus:ring-2 focus:ring-brand-400 focus:border-transparent outline-none transition-all text-sm text-slate-700"
@@ -285,7 +308,12 @@ const TriageForm = () => {
           ) : (
             <button 
               onClick={handleFinalSubmit}
-              className="px-6 py-2 bg-brand-600 text-white text-sm font-medium rounded-full shadow-md shadow-brand-200 hover:bg-brand-700 transition-all flex items-center gap-2"
+              disabled={!canProceed()}
+              className={`px-6 py-2 text-sm font-medium rounded-full transition-all flex items-center gap-2 ${
+                !canProceed() 
+                  ? 'bg-slate-100 text-slate-400 cursor-not-allowed'
+                  : 'bg-brand-600 text-white shadow-md shadow-brand-200 hover:bg-brand-700'
+              }`}
             >
               Agendar <ArrowRight className="w-4 h-4" />
             </button>
